@@ -1,0 +1,4 @@
+def register_controllers(app):
+    from ${packageName}.controllers.${controllerName}_controller import ${controllerName}_bp
+    app.register_blueprint(${controllerName}_bp)
+    # 可以添加更多控制器蓝图的注册    

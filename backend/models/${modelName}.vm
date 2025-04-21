@@ -1,0 +1,6 @@
+class ${modelName}:
+    def __init__(self, **kwargs):
+        # 这里可以根据实际的 columns 进行动态赋值
+        # 示例代码，可根据具体需求修改
+        for key, value in kwargs.items():
+            setattr(self, key, value)  

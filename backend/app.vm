@@ -1,0 +1,16 @@
+import os
+from flask import Flask
+from ${packageName}.controllers import register_controllers
+from flask_cors import CORS  # 新增导入
+
+app = Flask(__name__)
+CORS(app)  # 新增，启用 CORS
+
+# 加载配置
+app.config.from_object('config.DevelopmentConfig' if os.environ.get('FLASK_ENV') == 'development' else 'config.ProductionConfig')
+
+# 注册控制器
+register_controllers(app)
+
+if __name__ == '__main__':
+    app.run(host=app.config['HOST'], port=app.config['PORT'], debug=app.config['DEBUG'])    

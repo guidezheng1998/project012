@@ -1,0 +1,22 @@
+from ${packageName}.utils.database_utils import get_db_connection
+from ${packageName}.models.${modelName} import ${modelName}
+
+class ${repositoryName}Repository:
+    def get_${modelName}_data(self):
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM ${tableName}")
+        rows = cursor.fetchall()
+        conn.close()
+        return [dict(row) for row in rows]
+
+    def save_${modelName}(self, model):
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        columns = ', '.join(model.__dict__.keys())
+        values_placeholders = ', '.join(['?' for _ in model.__dict__.values()])
+        query = f"INSERT INTO ${tableName} ({columns}) VALUES ({values_placeholders})"
+        cursor.execute(query, tuple(model.__dict__.values()))
+        conn.commit()
+        conn.close()
+        return model    

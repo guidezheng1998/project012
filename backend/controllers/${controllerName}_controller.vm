@@ -1,0 +1,14 @@
+import os
+from flask import Blueprint, jsonify, request
+from ${packageName}.services.${serviceName}_service import ${serviceName}Service
+
+${controllerName}_bp = Blueprint('${controllerName}', __name__)
+${serviceName}_service = ${serviceName}Service()
+
+@${controllerName}_bp.route('/${routePath}', methods=['POST'])
+def interact_with_llm():
+    data = request.get_json()
+    prompt = data.get('prompt')
+    model_provider = data.get('model_provider', 'openai')  # 默认使用 OpenAI
+    response = ${serviceName}_service.interact_with_llm(prompt, model_provider)
+    return jsonify({'response': response})  
